@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace form_艾宾浩斯遗忘曲线记忆程序 {
@@ -32,33 +33,50 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 string[] fileNames = File.ReadAllLines("list.txt");
                 foreach (var fileName in fileNames) {
                     var memoryObject = new MemoryObject(fileName);
-                    var xml = XElement.Load(fileName + ".xml");
-                    int i = 0;
-                    // 循环正在复习/无需复习的内容
-                    foreach (var element in xml.Elements()) {
-                        foreach (var memoryModuleElement in element.Elements()) {
-                            MemoryModule memoryModule = new MemoryModule();
-                            memoryModule.Title = memoryModuleElement.Attribute("标题").Value;
-                            memoryModule.Data_toRemember = Convert.ToUInt64(memoryModuleElement.Attribute("下次复习时间").Value);
-                            memoryModule.TotalRememberTimes = Convert.ToInt32(memoryModuleElement.Attribute("共复习次数").Value);
-                            var xElement = memoryModuleElement.FirstNode as XElement;
-                            memoryModule.Content = xElement.Value;
-                            if (i == 0) {
-                                memoryObject.Add_memoryModule_toBeRemenbered(memoryModule);
-                            }
-                            else {
-                                memoryObject.Add_memoryModule_noNeedToBeRemenbered(memoryModule);
-                            }
-                            i++;
+                    //创建一个xml读取器
+                    XmlTextReader reader = new XmlTextReader(fileName + ".xml");
+                    //会识别取换行符
+                    reader.Normalization = false;
+                    
+                    //循环“正在复习的内容”这个名字的所有元素
+                    while (reader.ReadToFollowing("正在复习的内容")) {
+                        while (reader.ReadToFollowing("模块")) {
+                            //创建模块
+                            MemoryModule module = new MemoryModule();
+                            
+                            module.Title = reader.GetAttribute("标题");
+                            module.Data_toRemember = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
+                            module.TotalRememberTimes = Convert.ToInt32(reader.GetAttribute("共复习次数"));
+                            module.MemberLevel = Convert.ToInt32(reader.GetAttribute("记忆等级"));
+                            reader.ReadToFollowing("内容");
+                            module.Content = reader.ReadString();
+                            memoryObject.Add_memoryModule_toBeRemenbered(module);
+
+                        }
+                    }
+                    while (reader.ReadToFollowing("无需复习的内容")) {
+                        while (reader.ReadToFollowing("模块")) {
+                            //创建模块
+                            MemoryModule module = new MemoryModule();
+
+                            module.Title = reader.GetAttribute("标题");
+                            module.Data_toRemember = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
+                            module.TotalRememberTimes = Convert.ToInt32(reader.GetAttribute("共复习次数"));
+                            module.MemberLevel = Convert.ToInt32(reader.GetAttribute("记忆等级"));
+                            reader.ReadToFollowing("内容");
+                            module.Content = reader.ReadString();
+                            memoryObject.Add_memoryModule_noNeedToBeRemenbered(module);
+
                         }
                     }
                     memoryObject.Update();
                     this.List_MemoryObject.Add(memoryObject);
+                    reader.Close();
                 }
                 this.CurrentMemoryObject = this.List_MemoryObject[0];
                 Update_currentText();
                 lbl_object.Text = this.CurrentMemoryObject.ObjectName;
-                
+
                 for (int i = 0; i < this.List_MemoryObject.Count; i++) {
                     int j = i;
                     var toolStripMenuItem = new ToolStripMenuItem() {
@@ -89,7 +107,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             var memoryModule = this.CurrentMemoryObject.Get_nextMemoryModule(isRemember);
             lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
             if (this.CurrentMemoryObject.Get_times_toRemember() == 0) {
-               
+
                 MessageBox.Show("该主题已经全部复习完成！");
                 return;
             }
@@ -123,7 +141,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             Clear_text();
             lbl_times_toRemember.Text = "0";
             form2.Show();
-            
+
         }
 
         private void btn_refreshText_Click(object sender, EventArgs e) {
@@ -154,11 +172,11 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
 
         private void btn_yes_Click(object sender, EventArgs e) {
             if (Exist_memoryModule_toRemember()) {
-              
+
                 Update_nextText(true);
                 this.CurrentMemoryObject.Update();
             }
-      
+
         }
         /// <summary>
         /// 是否还存在复习的记忆模块
@@ -169,13 +187,13 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_memoryTree_toBeRemembered().Count.ToString();
             if (lbl_times_toRemember.Text == "0") {
                 MessageBox.Show("暂无复习内容。");
-                return false ;
+                return false;
             }
             return true;
         }
         private void btn_no_Click(object sender, EventArgs e) {
             if (Exist_memoryModule_toRemember()) {
-               
+
                 Update_nextText(false);
                 this.CurrentMemoryObject.Update();
             }
@@ -239,6 +257,10 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 Update_currentText();
                 this.CurrentMemoryObject.Update();
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+
         }
     }
 }

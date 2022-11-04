@@ -141,7 +141,7 @@
             this.菜单ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1104, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1104, 28);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -153,7 +153,7 @@
             this.创建复习内容ToolStripMenuItem,
             this.说明ToolStripMenuItem});
             this.菜单ToolStripMenuItem.Name = "菜单ToolStripMenuItem";
-            this.菜单ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
+            this.菜单ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.菜单ToolStripMenuItem.Text = "菜单";
             // 
             // 选择复习内容ToolStripMenuItem
@@ -288,6 +288,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "艾宾浩斯记忆程序";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

@@ -275,7 +275,9 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                  new XElement("内容", $"{ node.MemoryModule.Content}"),
                  new XAttribute("标题", $"{node.MemoryModule.Title}"),
                  new XAttribute("下次复习时间", $"{node.MemoryModule.Data_toRemember}"),
-                 new XAttribute("共复习次数", $"{node.MemoryModule.TotalRememberTimes}")));
+                 new XAttribute("共复习次数", $"{node.MemoryModule.TotalRememberTimes}"),
+                  new XAttribute("记忆等级", $"{node.MemoryModule.MemberLevel}")));
+
                 if (node.LeftTreeNode != null) {
                     Loop_chilrendNode(node.LeftTreeNode, xElement1);
                 }
@@ -290,7 +292,8 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                   new XElement("内容", $"{ _rootNode.MemoryModule.Content}"),
                   new XAttribute("标题", $"{_rootNode.MemoryModule.Title}"),
                   new XAttribute("下次复习时间", $"{_rootNode.MemoryModule.Data_toRemember}"),
-                  new XAttribute("共复习次数", $"{_rootNode.MemoryModule.TotalRememberTimes}")));
+                  new XAttribute("共复习次数", $"{_rootNode.MemoryModule.TotalRememberTimes}"),
+                   new XAttribute("记忆等级", $"{_rootNode.MemoryModule.MemberLevel}")));
             if (_rootNode.LeftTreeNode != null) {
                 Loop_chilrendNode(_rootNode.LeftTreeNode, xElement);
             }

@@ -13,7 +13,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// <summary>
         /// 记忆等级
         /// </summary>
-        public int _memberLevel = -1;
+        public int MemberLevel { get; set; } = -1;
         /// <summary>
         /// 标题
         /// </summary>
@@ -33,25 +33,25 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         public void Update(bool isRemember) {
             TotalRememberTimes++;
             if (isRemember) {
-                _memberLevel++;
-                if (_memberLevel > 8) {
-                    _memberLevel = 8;
+                MemberLevel++;
+                if (MemberLevel > 8) {
+                    MemberLevel = 8;
                 }
 
             }
             else {
-                _memberLevel-=2;
-                if (_memberLevel < -1) {
-                    _memberLevel = -1;
+                MemberLevel-=2;
+                if (MemberLevel < -1) {
+                    MemberLevel = -1;
                 }
             }
             Data_toRemember = Convert.ToUInt64(DateTime.Now.ToString("yyyyMMddHHmmssfff"));
-            if (_memberLevel == -1) {
-                //加5秒
+            if (MemberLevel == -1) {
+                //加30秒
                 Data_toRemember += 30000;
             }
             else {
-                Data_toRemember += 艾宾浩斯遗忘曲线类.艾宾浩斯遗忘曲线.Get_timesAdded(_memberLevel);
+                Data_toRemember += 艾宾浩斯遗忘曲线类.艾宾浩斯遗忘曲线.Get_timesAdded(MemberLevel);
             }
         }
 
