@@ -45,7 +45,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             }
         }
         /// <summary>
-        /// 每次返回“下一个记忆模块后”，都会更新该模块的“下一次记忆时间”。并把它从当前“所需复习内容”中移除，
+        /// 每次返回“下一个记忆模块后（正在复习中）”，都会更新该模块的“下一次记忆时间”。并把它从当前“所需复习内容”中移除，
         /// 添加到“无需复习内容”中。
         /// </summary>
         /// <param name="isRemember"></param>
@@ -55,8 +55,18 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             _memoryTree_noNeedToBeRemenbered.Add_memoryModule(nextMemoryModule);
             return nextMemoryModule;
         }
+        /// <summary>
+        /// 得到下一个正在复习的记忆模块
+        /// </summary>
+        /// <returns></returns>
         public MemoryModule Get_nextMemoryModule() {
             return _memoryTree_toBeRemembered.Get_nextMemoryModule();
+        }
+        /// <summary>
+        /// 删除下一个正在复习的记忆模块。
+        /// </summary>
+        public void Delete_nextMemoryModule() {
+            _memoryTree_toBeRemembered.Delete_theTreeNode(_memoryTree_toBeRemembered.Get_nextMemoryModule());
         }
         /// <summary>
         /// 创建一个记忆模块。

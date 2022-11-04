@@ -43,6 +43,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btn_refreshText = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -140,7 +141,7 @@
             this.菜单ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1104, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1104, 30);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -152,7 +153,7 @@
             this.创建复习内容ToolStripMenuItem,
             this.说明ToolStripMenuItem});
             this.菜单ToolStripMenuItem.Name = "菜单ToolStripMenuItem";
-            this.菜单ToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.菜单ToolStripMenuItem.Size = new System.Drawing.Size(53, 26);
             this.菜单ToolStripMenuItem.Text = "菜单";
             // 
             // 选择复习内容ToolStripMenuItem
@@ -243,12 +244,26 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.RosyBrown;
+            this.button3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3.ForeColor = System.Drawing.Color.Cornsilk;
+            this.button3.Location = new System.Drawing.Point(862, 104);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(97, 29);
+            this.button3.TabIndex = 17;
+            this.button3.Text = "删除知识点";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(1104, 853);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btn_refreshText);
             this.Controls.Add(this.button1);
@@ -302,6 +317,7 @@
         private System.Windows.Forms.Button btn_refreshText;
         private System.Windows.Forms.ToolStripMenuItem 说明ToolStripMenuItem;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

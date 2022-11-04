@@ -82,14 +82,14 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
 
         }
         /// <summary>
-        /// 更新下一个文本
+        /// 更新下一个记忆模块的文本。包括标题，内容，数量。如果数量为0，会直接返回。
         /// </summary>
         private void Update_nextText(bool isRemember) {
-
+            Clear_text();
             var memoryModule = this.CurrentMemoryObject.Get_nextMemoryModule(isRemember);
             lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
             if (this.CurrentMemoryObject.Get_times_toRemember() == 0) {
-                Clear_text();
+               
                 MessageBox.Show("该主题已经全部复习完成！");
                 return;
             }
@@ -154,23 +154,28 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
 
         private void btn_yes_Click(object sender, EventArgs e) {
             if (Exist_memoryModule_toRemember()) {
-                Clear_text();
+              
                 Update_nextText(true);
                 this.CurrentMemoryObject.Update();
             }
       
         }
+        /// <summary>
+        /// 是否还存在复习的记忆模块
+        /// </summary>
+        /// <returns></returns>
         private bool Exist_memoryModule_toRemember() {
+            Clear_text();
+            lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_memoryTree_toBeRemembered().Count.ToString();
             if (lbl_times_toRemember.Text == "0") {
                 MessageBox.Show("暂无复习内容。");
-                Clear_text();
                 return false ;
             }
             return true;
         }
         private void btn_no_Click(object sender, EventArgs e) {
             if (Exist_memoryModule_toRemember()) {
-                Clear_text();
+               
                 Update_nextText(false);
                 this.CurrentMemoryObject.Update();
             }
@@ -226,6 +231,14 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             this.CurrentMemoryObject.Get_nextMemoryModule().Title = tbx_title.Text;
             this.CurrentMemoryObject.Get_nextMemoryModule().Content = tbx_content.Text;
 
+        }
+
+        private void button3_Click(object sender, EventArgs e) {
+            this.CurrentMemoryObject.Delete_nextMemoryModule();
+            if (Exist_memoryModule_toRemember()) {
+                Update_currentText();
+                this.CurrentMemoryObject.Update();
+            }
         }
     }
 }

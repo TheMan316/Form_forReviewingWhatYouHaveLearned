@@ -89,7 +89,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             return memoryModule;
         }
         /// <summary>
-        /// 单纯返回下一个记忆模块
+        /// 单纯返回下一个记忆模块(就是当前复习时间最近的模块，也就是当前显示的模块）。
         /// </summary>
         /// <returns></returns>
         public MemoryModule Get_nextMemoryModule() {
@@ -271,7 +271,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         }
         public void Add_attributeOfMemoryModule_toTheElement(XElement xElement) {
             void Loop_chilrendNode(TreeNode node, XElement xElement1) {
-                xElement1.Add(new XElement("module",
+                xElement1.Add(new XElement("模块",
                  new XElement("内容", $"{ node.MemoryModule.Content}"),
                  new XAttribute("标题", $"{node.MemoryModule.Title}"),
                  new XAttribute("下次复习时间", $"{node.MemoryModule.Data_toRemember}"),
@@ -286,7 +286,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             if (_rootNode == null) {
                 return;
             }
-            xElement.Add(new XElement("module",
+            xElement.Add(new XElement("模块",
                   new XElement("内容", $"{ _rootNode.MemoryModule.Content}"),
                   new XAttribute("标题", $"{_rootNode.MemoryModule.Title}"),
                   new XAttribute("下次复习时间", $"{_rootNode.MemoryModule.Data_toRemember}"),
