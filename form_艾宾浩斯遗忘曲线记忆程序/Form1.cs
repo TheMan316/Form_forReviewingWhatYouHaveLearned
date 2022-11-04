@@ -154,6 +154,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
 
         private void btn_yes_Click(object sender, EventArgs e) {
             if (Exist_memoryModule_toRemember()) {
+                Clear_text();
                 Update_nextText(true);
                 this.CurrentMemoryObject.Update();
             }
@@ -169,6 +170,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         }
         private void btn_no_Click(object sender, EventArgs e) {
             if (Exist_memoryModule_toRemember()) {
+                Clear_text();
                 Update_nextText(false);
                 this.CurrentMemoryObject.Update();
             }
@@ -218,6 +220,12 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 "\n第九级：7天后进入复习时间。" +
                 "\n第十级：15天后进入复习时间。" +
                 "\n【提示】如果未记住，记忆等级下降2级。");
+        }
+
+        private void button2_Click_1(object sender, EventArgs e) {
+            this.CurrentMemoryObject.Get_nextMemoryModule().Title = tbx_title.Text;
+            this.CurrentMemoryObject.Get_nextMemoryModule().Content = tbx_content.Text;
+
         }
     }
 }
