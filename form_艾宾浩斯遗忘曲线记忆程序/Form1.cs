@@ -31,14 +31,14 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         private void Load_xml() {
             if (File.Exists("list.txt")) {
                 string[] fileNames = File.ReadAllLines("list.txt");
-               
                 foreach (var fileName in fileNames) {
-                    if (File.Exists(fileName) == false) {
+                    string xmlFile = fileName + ".xml";
+                    if (File.Exists(xmlFile) == false) {
                         continue;
                     }
                     var memoryObject = new MemoryObject(fileName);
                     //创建一个xml读取器
-                    XmlTextReader reader = new XmlTextReader(fileName + ".xml");
+                    XmlTextReader reader = new XmlTextReader(xmlFile);
                     //会识别取换行符
                     reader.Normalization = false;
                     //循环“正在复习的内容”这个名字的所有元素
@@ -46,7 +46,6 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                         while (reader.ReadToFollowing("模块")) {
                             //创建模块
                             MemoryModule module = new MemoryModule();
-                            
                             module.Title = reader.GetAttribute("标题");
                             module.Date_toRemember = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
                             module.TotalRememberTimes = Convert.ToInt32(reader.GetAttribute("共复习次数"));
@@ -80,10 +79,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                     this.CurrentMemoryObject = this.List_MemoryObject[0];
                     Update_currentText();
                     lbl_object.Text = this.CurrentMemoryObject.ObjectName;
-
                 }
-
-
                 for (int i = 0; i < this.List_MemoryObject.Count; i++) {
                     int j = i;
                     var toolStripMenuItem = new ToolStripMenuItem() {
@@ -104,7 +100,6 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
 
         private void btn_next_Click(object sender, EventArgs e) {
 
-
         }
         /// <summary>
         /// 更新下一个记忆模块的文本。包括标题，内容，数量。如果数量为0，会直接返回。
@@ -114,7 +109,6 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             var memoryModule = this.CurrentMemoryObject.Get_nextMemoryModule(isRemember);
             lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
             if (this.CurrentMemoryObject.Get_times_toRemember() == 0) {
-
                 MessageBox.Show("该主题已经全部复习完成！");
                 return;
             }
