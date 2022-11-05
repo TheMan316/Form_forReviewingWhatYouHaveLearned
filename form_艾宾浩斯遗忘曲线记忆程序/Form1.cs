@@ -31,13 +31,16 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         private void Load_xml() {
             if (File.Exists("list.txt")) {
                 string[] fileNames = File.ReadAllLines("list.txt");
+               
                 foreach (var fileName in fileNames) {
+                    if (File.Exists(fileName) == false) {
+                        continue;
+                    }
                     var memoryObject = new MemoryObject(fileName);
                     //创建一个xml读取器
                     XmlTextReader reader = new XmlTextReader(fileName + ".xml");
                     //会识别取换行符
                     reader.Normalization = false;
-                    
                     //循环“正在复习的内容”这个名字的所有元素
                     while (reader.ReadToFollowing("正在复习的内容")) {
                         while (reader.ReadToFollowing("模块")) {
@@ -45,7 +48,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                             MemoryModule module = new MemoryModule();
                             
                             module.Title = reader.GetAttribute("标题");
-                            module.Data_toRemember = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
+                            module.Date_toRemember = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
                             module.TotalRememberTimes = Convert.ToInt32(reader.GetAttribute("共复习次数"));
                             module.MemberLevel = Convert.ToInt32(reader.GetAttribute("记忆等级"));
                             reader.ReadToFollowing("内容");
@@ -60,7 +63,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                             MemoryModule module = new MemoryModule();
 
                             module.Title = reader.GetAttribute("标题");
-                            module.Data_toRemember = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
+                            module.Date_toRemember = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
                             module.TotalRememberTimes = Convert.ToInt32(reader.GetAttribute("共复习次数"));
                             module.MemberLevel = Convert.ToInt32(reader.GetAttribute("记忆等级"));
                             reader.ReadToFollowing("内容");
@@ -70,12 +73,16 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                         }
                     }
                     memoryObject.Update();
-                    this.List_MemoryObject.Add(memoryObject);
                     reader.Close();
+                    this.List_MemoryObject.Add(memoryObject);
                 }
-                this.CurrentMemoryObject = this.List_MemoryObject[0];
-                Update_currentText();
-                lbl_object.Text = this.CurrentMemoryObject.ObjectName;
+                if (this.List_MemoryObject.Count > 0) {
+                    this.CurrentMemoryObject = this.List_MemoryObject[0];
+                    Update_currentText();
+                    lbl_object.Text = this.CurrentMemoryObject.ObjectName;
+
+                }
+
 
                 for (int i = 0; i < this.List_MemoryObject.Count; i++) {
                     int j = i;

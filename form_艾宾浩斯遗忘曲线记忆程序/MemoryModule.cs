@@ -25,12 +25,13 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// <summary>
         /// 记忆时间
         /// </summary>
-        public ulong Data_toRemember { get; set; }
+        public ulong Date_toRemember { get; set; }
 
         /// <summary>
         /// 更新数据
         /// </summary>
         public void Update(bool isRemember) {
+            var date_toRemember = DateTime.ParseExact(Date_toRemember.ToString(), "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.CurrentCulture);
             TotalRememberTimes++;
             if (isRemember) {
                 MemberLevel++;
@@ -40,19 +41,20 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
 
             }
             else {
-                MemberLevel-=2;
+                MemberLevel -= 2;
                 if (MemberLevel < -1) {
                     MemberLevel = -1;
                 }
             }
-            Data_toRemember = Convert.ToUInt64(DateTime.Now.ToString("yyyyMMddHHmmssfff"));
             if (MemberLevel == -1) {
                 //加30秒
-                Data_toRemember += 30000;
+                date_toRemember = date_toRemember.AddSeconds(30);
             }
             else {
-                Data_toRemember += 艾宾浩斯遗忘曲线类.艾宾浩斯遗忘曲线.Get_timesAdded(MemberLevel);
+               uint m = 艾宾浩斯遗忘曲线类.艾宾浩斯遗忘曲线.Get_timesAdded(MemberLevel);
+                date_toRemember = date_toRemember.AddMinutes(m);
             }
+            Date_toRemember = Convert.ToUInt64(date_toRemember.ToString("yyyyMMddHHmmssfff"));
         }
 
     }

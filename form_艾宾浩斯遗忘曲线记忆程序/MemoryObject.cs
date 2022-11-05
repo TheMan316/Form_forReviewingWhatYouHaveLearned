@@ -38,7 +38,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             }
             ulong dateNow = Convert.ToUInt64(DateTime.Now.ToString("yyyyMMddHHmmssfff"));
             var minTreeNode = _memoryTree_noNeedToBeRemenbered.Find_minTreeNode();
-            while (_memoryTree_noNeedToBeRemenbered.Count > 0 && minTreeNode.MemoryModule.Data_toRemember < dateNow) {
+            while (_memoryTree_noNeedToBeRemenbered.Count > 0 && minTreeNode.MemoryModule.Date_toRemember < dateNow) {
                 _memoryTree_toBeRemembered.Add_memoryModule(minTreeNode.MemoryModule);
                 _memoryTree_noNeedToBeRemenbered.Delete_theTreeNode(minTreeNode.MemoryModule);
                 minTreeNode = _memoryTree_noNeedToBeRemenbered.Find_minTreeNode();
@@ -77,7 +77,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             MemoryModule memoryModule = new MemoryModule();
             memoryModule.Title = title;
             memoryModule.Content = content;
-            memoryModule.Data_toRemember = Convert.ToUInt64(DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+            memoryModule.Date_toRemember = Convert.ToUInt64(DateTime.Now.ToString("yyyyMMddHHmmssfff"));
             _memoryTree_toBeRemembered.Add_memoryModule(memoryModule);
         }
         public void Add_memoryModule_noNeedToBeRemenbered(MemoryModule memoryModule) {
