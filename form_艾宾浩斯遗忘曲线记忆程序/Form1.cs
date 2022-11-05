@@ -53,7 +53,6 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                             reader.ReadToFollowing("内容");
                             module.Content = reader.ReadString();
                             memoryObject.Add_memoryModule_toBeRemenbered(module);
-
                         }
                     }
                     while (reader.ReadToFollowing("无需复习的内容")) {

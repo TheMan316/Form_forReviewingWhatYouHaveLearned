@@ -31,14 +31,13 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// 更新数据
         /// </summary>
         public void Update(bool isRemember) {
-            var date_toRemember = DateTime.ParseExact(Date_toRemember.ToString(), "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.CurrentCulture);
+            var date_toRemember = DateTime.Now;
             TotalRememberTimes++;
             if (isRemember) {
                 MemberLevel++;
                 if (MemberLevel > 8) {
                     MemberLevel = 8;
                 }
-
             }
             else {
                 MemberLevel -= 2;
