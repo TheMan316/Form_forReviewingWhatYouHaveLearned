@@ -24,6 +24,13 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             Form1.form.List_MemoryObject.Add(memoryObject);
             Form1.form.lbl_object.Text = Form1.form.CurrentMemoryObject.ObjectName;
             Form1.form.CurrentMemoryObject = Form1.form.List_MemoryObject[Form1.form.List_MemoryObject.Count - 1];
+            var toolStripMenuItem = new ToolStripMenuItem() {
+                Text = Form1.form.lbl_object.Text
+            };
+            toolStripMenuItem.Click += (o, f) => {
+                Form1.form.Choose_currentModuleObject(Form1.form.List_MemoryObject.Count-1);
+            };
+            Form1.form.选择复习内容ToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
             MessageBox.Show("创建成功，请为当前的新主题添加复习内容！");
             this.Close();
         }

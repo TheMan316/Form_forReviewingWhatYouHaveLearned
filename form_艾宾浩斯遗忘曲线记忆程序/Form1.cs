@@ -48,41 +48,45 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                         continue;
                     }
                     var memoryObject = new MemoryObject(fileName);
+                    if (fileName == "英语阅读") {
+                        int a = 1;
+                    }
                     //创建一个xml读取器
                     XmlTextReader reader = new XmlTextReader(xmlFile);
                     //会识别取换行符
                     reader.Normalization = false;
                     //循环“正在复习的内容”这个名字的所有元素
-                    while (reader.ReadToFollowing("正在复习的内容")) {
-                        while (reader.ReadToFollowing("模块")) {
-                            //创建模块
-                            MemoryModule module = new MemoryModule();
-                            module.Title = reader.GetAttribute("标题");
-                            module.Date_toRemember = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
-                            module.TotalRememberTimes = Convert.ToInt32(reader.GetAttribute("共复习次数"));
-                            module.MemberLevel = Convert.ToInt32(reader.GetAttribute("记忆等级"));
-                            reader.ReadToFollowing("内容");
-                            module.Content = reader.ReadString();
-                            memoryObject.Add_memoryModule_toBeRemenbered(module);
-                        }
-                    }
-                    while (reader.ReadToFollowing("无需复习的内容")) {
-                        while (reader.ReadToFollowing("模块")) {
-                            //创建模块
-                            MemoryModule module = new MemoryModule();
+                    bool toRemember = true;
+                    while (reader.Read()) {
+                        if (reader.NodeType == XmlNodeType.Element ) {
+                            if ( reader.Name == "无需复习的内容") {
+                                toRemember = false;
+                            }
+                            if (reader.Name == "模块") {
+                                //创建模块
+                                MemoryModule module = new MemoryModule();
+                                module.Title = reader.GetAttribute("标题");
+                                module.Date_toRemember = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
+                                module.TotalRememberTimes = Convert.ToInt32(reader.GetAttribute("共复习次数"));
+                                module.MemberLevel = Convert.ToInt32(reader.GetAttribute("记忆等级"));
+                                //跳到下一个“内容”节点
+                                reader.ReadToDescendant("内容");
+                                module.Content = reader.ReadString();
+                                if (toRemember) {
+                                    memoryObject.Add_memoryModule_toBeRemenbered(module);
 
-                            module.Title = reader.GetAttribute("标题");
-                            module.Date_toRemember = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
-                            module.TotalRememberTimes = Convert.ToInt32(reader.GetAttribute("共复习次数"));
-                            module.MemberLevel = Convert.ToInt32(reader.GetAttribute("记忆等级"));
-                            reader.ReadToFollowing("内容");
-                            module.Content = reader.ReadString();
-                            memoryObject.Add_memoryModule_noNeedToBeRemenbered(module);
+                                }
+                                else {
+                                    memoryObject.Add_memoryModule_noNeedToBeRemenbered(module);
 
+                                }
+                            }
+           
                         }
+                       
                     }
-                    memoryObject.Update();
                     reader.Close();
+                    memoryObject.Update();
                     this.List_MemoryObject.Add(memoryObject);
                 }
                 if (this.List_MemoryObject.Count > 0) {
@@ -102,7 +106,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 }
             }
         }
-        private void Choose_currentModuleObject(int index) {
+        public void Choose_currentModuleObject(int index) {
             this.CurrentMemoryObject = this.List_MemoryObject[index];
 
             Update_currentText();
@@ -221,6 +225,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+
             var stream = File.CreateText("list.txt");
             for (int i = 0; i < this.List_MemoryObject.Count; i++) {
                 XDocument xml = new XDocument();
