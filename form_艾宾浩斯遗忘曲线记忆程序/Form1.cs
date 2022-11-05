@@ -27,6 +27,17 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             form = this;
             InitializeComponent();
             Load_xml();
+            if (this.List_MemoryObject.Count > 0) {
+                string content = "当前所需复习的主题有：";
+                for (int i = 0; i < List_MemoryObject.Count; i++) {
+                    if (List_MemoryObject[i].Get_times_toRemember() > 0) {
+                        content += $"\n{List_MemoryObject[i].ObjectName}，复习的知识数量为：" +
+                            $"{List_MemoryObject[i].Get_times_toRemember()}";
+                    }
+                }
+                MessageBox.Show(content);
+
+            }
         }
         private void Load_xml() {
             if (File.Exists("list.txt")) {
@@ -93,6 +104,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         }
         private void Choose_currentModuleObject(int index) {
             this.CurrentMemoryObject = this.List_MemoryObject[index];
+
             Update_currentText();
             lbl_object.Text = this.CurrentMemoryObject.ObjectName;
         }
@@ -122,7 +134,6 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             }
 
             CurrentMemoryObject.Creat_memoryModule(tbx_title.Text, tbx_content.Text);
-            Clear_text();
             Update_currentText();
         }
         public bool Exist_memoryObject(string name) {
@@ -161,10 +172,11 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             Update_currentText();
         }
         private void Update_currentText() {
-            if (this.CurrentMemoryObject.Get_times_toRemember() == 0) {
+            Clear_text();
+            lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
+            if (lbl_times_toRemember.Text == "0") {
                 return;
             }
-            lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
             var memoryModule = this.CurrentMemoryObject.Get_nextMemoryModule();
             tbx_title.Text = memoryModule.Title;
 
