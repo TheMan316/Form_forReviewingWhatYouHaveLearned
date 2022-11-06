@@ -27,6 +27,9 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             form = this;
             InitializeComponent();
             Load_xml();
+            Get_reviewContent();
+        }
+        private void Get_reviewContent() {
             if (this.List_MemoryObject.Count > 0) {
                 string content = "当前所需复习的主题有：";
                 for (int i = 0; i < List_MemoryObject.Count; i++) {
@@ -36,7 +39,6 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                     }
                 }
                 MessageBox.Show(content);
-
             }
         }
         private void Load_xml() {
@@ -58,8 +60,8 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                     //循环“正在复习的内容”这个名字的所有元素
                     bool toRemember = true;
                     while (reader.Read()) {
-                        if (reader.NodeType == XmlNodeType.Element ) {
-                            if ( reader.Name == "无需复习的内容") {
+                        if (reader.NodeType == XmlNodeType.Element) {
+                            if (reader.Name == "无需复习的内容") {
                                 toRemember = false;
                             }
                             if (reader.Name == "模块") {
@@ -81,9 +83,9 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
 
                                 }
                             }
-           
+
                         }
-                       
+
                     }
                     reader.Close();
                     memoryObject.Update();
@@ -174,6 +176,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         private void button1_Click(object sender, EventArgs e) {
             this.CurrentMemoryObject.Update();
             Update_currentText();
+            Get_reviewContent();
         }
         private void Update_currentText() {
             Clear_text();
