@@ -28,9 +28,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             _memoryTree_noNeedToBeRemenbered = new BinaryTree();
         }
         /// <summary>
-        /// 更新数据。
-        /// Add the MemoryModules that has reached the review time in the "_memoryTree_noNeedToBeRemenbered" 
-        /// to the "_memoryTree_toBeRemembered".
+        /// 更新数据时，把位于“未复习内容”中已到达复习时间的记忆模块添加到“正在复习内容”列表中。
         /// </summary>
         public void Update() {
             if (_memoryTree_noNeedToBeRemenbered.Count == 0) {
@@ -38,35 +36,34 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             }
             ulong dateNow = Convert.ToUInt64(DateTime.Now.ToString("yyyyMMddHHmmssfff"));
             var minTreeNode = _memoryTree_noNeedToBeRemenbered.Find_minTreeNode();
-            while (_memoryTree_noNeedToBeRemenbered.Count > 0 && minTreeNode.MemoryModule.Date_toRemember < dateNow) {
+            while (_memoryTree_noNeedToBeRemenbered.Count > 0 && minTreeNode.MemoryModule.ReviewTime < dateNow) {
                 _memoryTree_toBeRemembered.Add_memoryModule(minTreeNode.MemoryModule);
                 _memoryTree_noNeedToBeRemenbered.Delete_theTreeNode(minTreeNode.MemoryModule);
                 minTreeNode = _memoryTree_noNeedToBeRemenbered.Find_minTreeNode();
             }
         }
         /// <summary>
-        /// 每次返回“下一个记忆模块后（正在复习中）”，都会更新该模块的“下一次记忆时间”。并把它从当前“所需复习内容”中移除，
-        /// 添加到“无需复习内容”中。
+        /// 根据是否记住的状态更新当前记忆模块的“下一个复习时间”，然后把它从“正在复习内容”中删除。
         /// </summary>
         /// <param name="isRemember"></param>
         /// <returns></returns>
         public MemoryModule Get_nextMemoryModule(bool isRemember) {
-            var nextMemoryModule = _memoryTree_toBeRemembered.Get_nextMemoryModule(isRemember);
-            _memoryTree_noNeedToBeRemenbered.Add_memoryModule(nextMemoryModule);
-            return nextMemoryModule;
+            var memoryModule_hasBeenDeleted = _memoryTree_toBeRemembered.Get_currentMemoryModule_willBeDeleted(isRemember);
+            _memoryTree_noNeedToBeRemenbered.Add_memoryModule(memoryModule_hasBeenDeleted);
+            return Get_nextMemoryModule();
         }
         /// <summary>
-        /// 得到下一个正在复习的记忆模块
+        ///  Get the memory module that closest to the review time
         /// </summary>
         /// <returns></returns>
         public MemoryModule Get_nextMemoryModule() {
-            return _memoryTree_toBeRemembered.Get_nextMemoryModule();
+            return _memoryTree_toBeRemembered.Get_currentMemoryModule();
         }
         /// <summary>
         /// 删除下一个正在复习的记忆模块。
         /// </summary>
         public void Delete_nextMemoryModule() {
-            _memoryTree_toBeRemembered.Delete_theTreeNode(_memoryTree_toBeRemembered.Get_nextMemoryModule());
+            _memoryTree_toBeRemembered.Delete_theTreeNode(_memoryTree_toBeRemembered.Get_currentMemoryModule());
         }
         /// <summary>
         /// 创建一个记忆模块。
@@ -77,7 +74,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             MemoryModule memoryModule = new MemoryModule();
             memoryModule.Title = title;
             memoryModule.Content = content;
-            memoryModule.Date_toRemember = Convert.ToUInt64(DateTime.Now.ToString("yyyyMMddHHmmssfff"));
+            memoryModule.ReviewTime = Convert.ToUInt64(DateTime.Now.ToString("yyyyMMddHHmmssfff"));
             _memoryTree_toBeRemembered.Add_memoryModule(memoryModule);
         }
         public void Add_memoryModule_noNeedToBeRemenbered(MemoryModule memoryModule) {

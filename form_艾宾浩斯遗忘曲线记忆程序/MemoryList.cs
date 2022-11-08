@@ -77,22 +77,21 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         public BinaryTree() {
         }
         /// <summary>
-        /// 返回下一个记忆模块后，根据“是否记住”来更新该模块的下一次记忆时间
+        /// Get the will be deleted memory module that is closest to the review time and update its review time
         /// </summary>
         /// <param name="isRemember"></param>
         /// <returns></returns>
-        public MemoryModule Get_nextMemoryModule(bool isRemember) {
+        public MemoryModule Get_currentMemoryModule_willBeDeleted(bool isRemember) {
             MemoryModule memoryModule = Find_minTreeNode().MemoryModule;
             Delete_theTreeNode(memoryModule);
             memoryModule.Update(isRemember);
-            
             return memoryModule;
         }
         /// <summary>
-        /// 单纯返回下一个记忆模块(就是当前复习时间最近的模块，也就是当前显示的模块）。
+        /// Get the memory module that closest to the review time
         /// </summary>
         /// <returns></returns>
-        public MemoryModule Get_nextMemoryModule() {
+        public MemoryModule Get_currentMemoryModule() {
             return Find_minTreeNode().MemoryModule;
         }
 
@@ -107,7 +106,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 //更新父节点
                 parentNode_ofCurrentTreeNode = currentTreeNode;
                 MemoryModule currentMemoryModule = currentTreeNode.MemoryModule;
-                if (memoryModule_willBeDelete.Date_toRemember < currentMemoryModule.Date_toRemember) {
+                if (memoryModule_willBeDelete.ReviewTime < currentMemoryModule.ReviewTime) {
                     IsLefeTreeNode = true;
                     if (currentTreeNode.LeftTreeNode != null) {
                         currentTreeNode = currentTreeNode.LeftTreeNode;
@@ -117,7 +116,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                         return;
                     }
                 }
-                else if (memoryModule_willBeDelete.Date_toRemember > currentMemoryModule.Date_toRemember) {
+                else if (memoryModule_willBeDelete.ReviewTime > currentMemoryModule.ReviewTime) {
                     IsLefeTreeNode = false;
                     if (currentTreeNode.RightTreeNode != null) {
                         currentTreeNode = currentTreeNode.RightTreeNode;
@@ -248,9 +247,9 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             }
 
             //根据时间判断判断方向
-            while (currentTreeNode.MemoryModule.Date_toRemember != memoryModule_willBeAdded.Date_toRemember) {
+            while (currentTreeNode.MemoryModule.ReviewTime != memoryModule_willBeAdded.ReviewTime) {
                 MemoryModule currentMemoryModule = currentTreeNode.MemoryModule;
-                if (memoryModule_willBeAdded.Date_toRemember < currentMemoryModule.Date_toRemember) {
+                if (memoryModule_willBeAdded.ReviewTime < currentMemoryModule.ReviewTime) {
                     if (currentTreeNode.LeftTreeNode == null) {
                         currentTreeNode.LeftTreeNode = new TreeNode(memoryModule_willBeAdded);
                         break;
@@ -258,7 +257,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                     currentTreeNode = currentTreeNode.LeftTreeNode;
 
                 }
-                else if (memoryModule_willBeAdded.Date_toRemember > currentMemoryModule.Date_toRemember) {
+                else if (memoryModule_willBeAdded.ReviewTime > currentMemoryModule.ReviewTime) {
                     if (currentTreeNode.RightTreeNode == null) {
                         currentTreeNode.RightTreeNode = new TreeNode(memoryModule_willBeAdded);
                         break;
@@ -274,7 +273,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 xElement1.Add(new XElement("模块",
                  new XElement("内容", $"{ node.MemoryModule.Content}"),
                  new XAttribute("标题", $"{node.MemoryModule.Title}"),
-                 new XAttribute("下次复习时间", $"{node.MemoryModule.Date_toRemember}"),
+                 new XAttribute("下次复习时间", $"{node.MemoryModule.ReviewTime}"),
                  new XAttribute("共复习次数", $"{node.MemoryModule.TotalRememberTimes}"),
                   new XAttribute("记忆等级", $"{node.MemoryModule.MemberLevel}")));
 
@@ -291,7 +290,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             xElement.Add(new XElement("模块",
                   new XElement("内容", $"{ _rootNode.MemoryModule.Content}"),
                   new XAttribute("标题", $"{_rootNode.MemoryModule.Title}"),
-                  new XAttribute("下次复习时间", $"{_rootNode.MemoryModule.Date_toRemember}"),
+                  new XAttribute("下次复习时间", $"{_rootNode.MemoryModule.ReviewTime}"),
                   new XAttribute("共复习次数", $"{_rootNode.MemoryModule.TotalRememberTimes}"),
                    new XAttribute("记忆等级", $"{_rootNode.MemoryModule.MemberLevel}")));
             if (_rootNode.LeftTreeNode != null) {

@@ -25,7 +25,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// <summary>
         /// 记忆时间
         /// </summary>
-        public ulong Date_toRemember { get; set; }
+        public ulong ReviewTime { get; set; }
 
         /// <summary>
         /// 更新数据
@@ -53,7 +53,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                uint m = 艾宾浩斯遗忘曲线类.艾宾浩斯遗忘曲线.Get_timesAdded(MemberLevel);
                 date_toRemember = date_toRemember.AddMinutes(m);
             }
-            Date_toRemember = Convert.ToUInt64(date_toRemember.ToString("yyyyMMddHHmmssfff"));
+            ReviewTime = Convert.ToUInt64(date_toRemember.ToString("yyyyMMddHHmmssfff"));
         }
 
     }

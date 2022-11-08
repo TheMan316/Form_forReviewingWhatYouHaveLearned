@@ -68,7 +68,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                                 //创建模块
                                 MemoryModule module = new MemoryModule();
                                 module.Title = reader.GetAttribute("标题");
-                                module.Date_toRemember = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
+                                module.ReviewTime = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
                                 module.TotalRememberTimes = Convert.ToInt32(reader.GetAttribute("共复习次数"));
                                 module.MemberLevel = Convert.ToInt32(reader.GetAttribute("记忆等级"));
                                 //跳到下一个“内容”节点
@@ -123,14 +123,13 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// </summary>
         private void Update_nextText(bool isRemember) {
             Clear_text();
-            var memoryModule = this.CurrentMemoryObject.Get_nextMemoryModule(isRemember);
             lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
             if (this.CurrentMemoryObject.Get_times_toRemember() == 0) {
                 MessageBox.Show("该主题已经全部复习完成！");
                 return;
             }
-            var newMemoryModule = this.CurrentMemoryObject.Get_nextMemoryModule();
-            tbx_title.Text = newMemoryModule.Title;
+            var memoryModule = this.CurrentMemoryObject.Get_nextMemoryModule(isRemember);
+            tbx_title.Text = memoryModule.Title;
         }
 
         private void btn_addNewMemoryModule_Click(object sender, EventArgs e) {
