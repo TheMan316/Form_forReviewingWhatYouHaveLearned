@@ -224,10 +224,10 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         private void btn_showAnswer_Click(object sender, EventArgs e) {
             if (lbl_times_toRemember.Text == "0") {
                 MessageBox.Show("暂无复习内容。");
-                return ;
+                return;
             }
-                tbx_content.Text = this.CurrentMemoryObject.Get_nextMemoryModule().Content;
-           
+            tbx_content.Text = this.CurrentMemoryObject.Get_nextMemoryModule().Content;
+
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
@@ -269,10 +269,12 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         }
 
         private void button2_Click_1(object sender, EventArgs e) {
-            if (Exist_memoryModule_toRemember()) {
-                this.CurrentMemoryObject.Get_nextMemoryModule().Title = tbx_title.Text;
-                this.CurrentMemoryObject.Get_nextMemoryModule().Content = tbx_content.Text;
+            if (lbl_times_toRemember.Text == "0") {
+                MessageBox.Show("暂无复习内容。");
+                return;
             }
+            this.CurrentMemoryObject.Get_nextMemoryModule().Title = tbx_title.Text;
+            this.CurrentMemoryObject.Get_nextMemoryModule().Content = tbx_content.Text;
         }
 
         private void button3_Click(object sender, EventArgs e) {
