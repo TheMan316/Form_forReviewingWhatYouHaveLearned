@@ -123,13 +123,13 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// </summary>
         private void Update_nextText(bool isRemember) {
             Clear_text();
+            this.CurrentMemoryObject.Set_reviewTime_ofCurrentMemoryModule(isRemember);
             lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
-            if (this.CurrentMemoryObject.Get_times_toRemember() == 0) {
-                MessageBox.Show("该主题已经全部复习完成！");
+            if (lbl_times_toRemember.Text == "0") {
+                MessageBox.Show("本主题已经复习完毕！");
                 return;
             }
-            var memoryModule = this.CurrentMemoryObject.Get_nextMemoryModule(isRemember);
-            tbx_title.Text = memoryModule.Title;
+            tbx_title.Text = this.CurrentMemoryObject.Get_nextMemoryModule().Title;
         }
 
         private void btn_addNewMemoryModule_Click(object sender, EventArgs e) {
@@ -202,7 +202,6 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// <returns></returns>
         private bool Exist_memoryModule_toRemember() {
             Clear_text();
-            lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_memoryTree_toBeRemembered().Count.ToString();
             if (lbl_times_toRemember.Text == "0") {
                 MessageBox.Show("暂无复习内容。");
                 return false;
@@ -223,7 +222,10 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         }
 
         private void btn_showAnswer_Click(object sender, EventArgs e) {
-            tbx_content.Text = this.CurrentMemoryObject.Get_nextMemoryModule().Content;
+            if (Exist_memoryModule_toRemember()) {
+                tbx_content.Text = this.CurrentMemoryObject.Get_nextMemoryModule().Content;
+            }
+           
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
@@ -265,9 +267,10 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         }
 
         private void button2_Click_1(object sender, EventArgs e) {
-            this.CurrentMemoryObject.Get_nextMemoryModule().Title = tbx_title.Text;
-            this.CurrentMemoryObject.Get_nextMemoryModule().Content = tbx_content.Text;
-
+            if (Exist_memoryModule_toRemember()) {
+                this.CurrentMemoryObject.Get_nextMemoryModule().Title = tbx_title.Text;
+                this.CurrentMemoryObject.Get_nextMemoryModule().Content = tbx_content.Text;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e) {

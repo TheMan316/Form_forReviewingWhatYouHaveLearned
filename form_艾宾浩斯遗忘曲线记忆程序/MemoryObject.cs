@@ -47,10 +47,9 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// </summary>
         /// <param name="isRemember"></param>
         /// <returns></returns>
-        public MemoryModule Get_nextMemoryModule(bool isRemember) {
+        public void Set_reviewTime_ofCurrentMemoryModule(bool isRemember) {
             var memoryModule_hasBeenDeleted = _memoryTree_toBeRemembered.Get_currentMemoryModule_willBeDeleted(isRemember);
             _memoryTree_noNeedToBeRemenbered.Add_memoryModule(memoryModule_hasBeenDeleted);
-            return Get_nextMemoryModule();
         }
         /// <summary>
         ///  Get the memory module that closest to the review time
