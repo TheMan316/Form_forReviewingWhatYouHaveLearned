@@ -222,9 +222,11 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         }
 
         private void btn_showAnswer_Click(object sender, EventArgs e) {
-            if (Exist_memoryModule_toRemember()) {
-                tbx_content.Text = this.CurrentMemoryObject.Get_nextMemoryModule().Content;
+            if (lbl_times_toRemember.Text == "0") {
+                MessageBox.Show("暂无复习内容。");
+                return ;
             }
+                tbx_content.Text = this.CurrentMemoryObject.Get_nextMemoryModule().Content;
            
         }
 
