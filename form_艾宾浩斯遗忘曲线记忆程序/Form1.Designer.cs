@@ -44,6 +44,7 @@
             this.btn_refreshText = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +58,7 @@
             this.tbx_title.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbx_title.Size = new System.Drawing.Size(784, 135);
             this.tbx_title.TabIndex = 0;
+            this.tbx_title.TextChanged += new System.EventHandler(this.tbx_title_TextChanged);
             // 
             // btn_showAnswer
             // 
@@ -90,6 +92,7 @@
             this.tbx_content.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbx_content.Size = new System.Drawing.Size(1070, 481);
             this.tbx_content.TabIndex = 4;
+            this.tbx_content.TextChanged += new System.EventHandler(this.tbx_content_TextChanged);
             // 
             // label1
             // 
@@ -142,7 +145,7 @@
             this.菜单ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1104, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1104, 30);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -258,12 +261,24 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(492, 68);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(317, 20);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "                            ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(1104, 853);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btn_refreshText);
@@ -320,6 +335,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         public System.Windows.Forms.ToolStripMenuItem 选择复习内容ToolStripMenuItem;
+        private System.Windows.Forms.Label label5;
     }
 }
 

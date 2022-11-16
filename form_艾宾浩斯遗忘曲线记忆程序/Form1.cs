@@ -28,6 +28,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             InitializeComponent();
             Load_xml();
             Get_reviewContent();
+            label5.Text = "";
         }
         private void Get_reviewContent() {
             if (this.List_MemoryObject.Count > 0) {
@@ -140,6 +141,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
 
             CurrentMemoryObject.Creat_memoryModule(tbx_title.Text, tbx_content.Text);
             Update_currentText();
+            Clear_label5();
         }
         public bool Exist_memoryObject(string name) {
             foreach (var memoryObject in this.List_MemoryObject) {
@@ -167,6 +169,8 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// 清空文本所有内容
         /// </summary>
         private void Clear_text() {
+            
+
             tbx_content.Clear();
             tbx_title.Clear();
 
@@ -194,6 +198,10 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 Update_nextText(true);
                 this.CurrentMemoryObject.Update();
             }
+            Clear_label5();
+        }
+        private void Clear_label5() {
+            label5.Text = "";
 
         }
         /// <summary>
@@ -214,6 +222,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 Update_nextText(false);
                 this.CurrentMemoryObject.Update();
             }
+            Clear_label5();
         }
 
         private void button2_Click(object sender, EventArgs e) {
@@ -287,6 +296,14 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
 
         private void Form1_Load(object sender, EventArgs e) {
 
+        }
+
+        private void tbx_title_TextChanged(object sender, EventArgs e) {
+            label5.Text = "内容已经发生变更！";
+        }
+
+        private void tbx_content_TextChanged(object sender, EventArgs e) {
+            label5.Text = "内容已经发生变更！";
         }
     }
 }
