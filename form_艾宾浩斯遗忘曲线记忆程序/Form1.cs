@@ -236,6 +236,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 return;
             }
             tbx_content.Text = this.CurrentMemoryObject.Get_nextMemoryModule().Content;
+            Clear_label5();
 
         }
 
@@ -284,6 +285,8 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             }
             this.CurrentMemoryObject.Get_nextMemoryModule().Title = tbx_title.Text;
             this.CurrentMemoryObject.Get_nextMemoryModule().Content = tbx_content.Text;
+            Clear_label5();
+
         }
 
         private void button3_Click(object sender, EventArgs e) {
