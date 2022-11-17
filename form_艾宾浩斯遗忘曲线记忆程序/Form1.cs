@@ -180,6 +180,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             this.CurrentMemoryObject.Update();
             Update_currentText();
             Get_reviewContent();
+            Clear_label5();
         }
         private void Update_currentText() {
             Clear_text();
