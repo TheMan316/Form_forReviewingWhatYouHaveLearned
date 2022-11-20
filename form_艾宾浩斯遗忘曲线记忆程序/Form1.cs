@@ -114,6 +114,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
 
             Update_currentText();
             lbl_object.Text = this.CurrentMemoryObject.ObjectName;
+            Clear_label5();
         }
 
         private void btn_next_Click(object sender, EventArgs e) {
@@ -142,6 +143,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             CurrentMemoryObject.Creat_memoryModule(tbx_title.Text, tbx_content.Text);
             Update_currentText();
             Clear_label5();
+            button2.Enabled = true;
         }
         public bool Exist_memoryObject(string name) {
             foreach (var memoryObject in this.List_MemoryObject) {
@@ -164,6 +166,9 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
 
         private void btn_refreshText_Click(object sender, EventArgs e) {
             Clear_text();
+            label5.Text = "正在添加新的记忆内容。";
+            //不允许更新内容
+            button2.Enabled = false;
         }
         /// <summary>
         /// 清空文本所有内容
