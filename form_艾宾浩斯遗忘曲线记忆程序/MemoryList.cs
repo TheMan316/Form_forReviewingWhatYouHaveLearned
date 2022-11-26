@@ -73,6 +73,9 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
     internal class BinaryTree {
 
         private TreeNode _rootNode;
+
+
+
         public int Count { get; set; }
         public BinaryTree() {
         }
@@ -93,6 +96,9 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// <returns></returns>
         public MemoryModule Get_currentMemoryModule() {
             return Find_minTreeNode().MemoryModule;
+        }
+        internal MemoryModule Get_rootMemoryModule() {
+            return _rootNode.MemoryModule;
         }
 
         public void Delete_theTreeNode(MemoryModule memoryModule_willBeDelete) {

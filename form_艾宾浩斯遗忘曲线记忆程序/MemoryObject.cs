@@ -58,6 +58,10 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         public MemoryModule Get_nextMemoryModule() {
             return _memoryTree_toBeRemembered.Get_currentMemoryModule();
         }
+        public MemoryModule Get_rootMemoryModule() {
+            return _memoryTree_toBeRemembered.Get_rootMemoryModule();
+
+        }
         /// <summary>
         /// 删除下一个正在复习的记忆模块。
         /// </summary>

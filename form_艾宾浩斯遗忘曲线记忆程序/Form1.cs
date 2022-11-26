@@ -133,7 +133,17 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             }
             tbx_title.Text = this.CurrentMemoryObject.Get_nextMemoryModule().Title;
         }
+        
+        private void Update_currentText() {
+            Clear_text();
+            lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
+            if (lbl_times_toRemember.Text == "0") {
+                return;
+            }
+            var memoryModule = this.CurrentMemoryObject.Get_nextMemoryModule();
+            tbx_title.Text = memoryModule.Title;
 
+        }
         private void btn_addNewMemoryModule_Click(object sender, EventArgs e) {
             if (lbl_object.Text == "无") {
                 MessageBox.Show("请先在菜单中添加一个复习主题！");
@@ -187,16 +197,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             Get_reviewContent();
             Clear_label5();
         }
-        private void Update_currentText() {
-            Clear_text();
-            lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
-            if (lbl_times_toRemember.Text == "0") {
-                return;
-            }
-            var memoryModule = this.CurrentMemoryObject.Get_nextMemoryModule();
-            tbx_title.Text = memoryModule.Title;
-
-        }
+ 
 
         private void btn_yes_Click(object sender, EventArgs e) {
             if (Exist_memoryModule_toRemember()) {
@@ -241,7 +242,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 MessageBox.Show("暂无复习内容。");
                 return;
             }
-            tbx_content.Text = this.CurrentMemoryObject.Get_nextMemoryModule().Content;
+            tbx_content.Text = this.CurrentMemoryObject.Get_rootMemoryModule().Content;
             Clear_label5();
 
         }

@@ -13,7 +13,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// <summary>
         /// 记忆等级
         /// </summary>
-        public int MemberLevel { get; set; } = -1;
+        public int MemberLevel { get; set; } = -2;
         /// <summary>
         /// 标题
         /// </summary>
