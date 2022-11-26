@@ -22,7 +22,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// 所有的复习主题
         /// </summary>
         internal List<MemoryObject> List_MemoryObject { get; set; } = new List<MemoryObject>();
-
+        private MemoryModule _currentMemoryModule;
         public Form1() {
             form = this;
             InitializeComponent();
@@ -131,7 +131,8 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 MessageBox.Show("本主题已经复习完毕！");
                 return;
             }
-            tbx_title.Text = this.CurrentMemoryObject.Get_nextMemoryModule().Title;
+            _currentMemoryModule = this.CurrentMemoryObject.Get_nextMemoryModule();
+            tbx_title.Text = _currentMemoryModule.Title;
         }
         
         private void Update_currentText() {
@@ -140,8 +141,8 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             if (lbl_times_toRemember.Text == "0") {
                 return;
             }
-            var memoryModule = this.CurrentMemoryObject.Get_nextMemoryModule();
-            tbx_title.Text = memoryModule.Title;
+            _currentMemoryModule = this.CurrentMemoryObject.Get_nextMemoryModule();
+            tbx_title.Text = _currentMemoryModule.Title;
 
         }
         private void btn_addNewMemoryModule_Click(object sender, EventArgs e) {
@@ -242,7 +243,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 MessageBox.Show("暂无复习内容。");
                 return;
             }
-            tbx_content.Text = this.CurrentMemoryObject.Get_rootMemoryModule().Content;
+            tbx_content.Text = _currentMemoryModule.Content;
             Clear_label5();
 
         }
