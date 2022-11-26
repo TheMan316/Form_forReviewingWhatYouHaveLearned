@@ -97,8 +97,37 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         public MemoryModule Get_currentMemoryModule() {
             return Find_minTreeNode().MemoryModule;
         }
-        internal MemoryModule Get_rootMemoryModule() {
-            return _rootNode.MemoryModule;
+        public MemoryModule Find_theMemoryModule(MemoryModule theMemoryModule) {
+            
+            if (_rootNode == null) {
+                return null;
+            }
+            TreeNode parentNode_ofCurrentTreeNode = null;
+            TreeNode currentTreeNode = _rootNode;
+            while (theMemoryModule.ReviewTime != currentTreeNode.MemoryModule.ReviewTime) {
+                //更新父节点
+                parentNode_ofCurrentTreeNode = currentTreeNode;
+                MemoryModule currentMemoryModule = currentTreeNode.MemoryModule;
+                if (theMemoryModule.ReviewTime < currentMemoryModule.ReviewTime) {
+                    if (currentTreeNode.LeftTreeNode != null) {
+                        currentTreeNode = currentTreeNode.LeftTreeNode;
+                    }
+                    //如果左节点为空，说明找到了这个值。
+                    else {
+                        break;
+                    }
+                }
+                else if (theMemoryModule.ReviewTime > currentMemoryModule.ReviewTime) {
+                    if (currentTreeNode.RightTreeNode != null) {
+                        currentTreeNode = currentTreeNode.RightTreeNode;
+                    }
+                    //如果右节点为空，说明找到了这个值
+                    else {
+                        break;
+                    }
+                }
+            }
+            return currentTreeNode.MemoryModule;
         }
 
         public void Delete_theTreeNode(MemoryModule memoryModule_willBeDelete) {

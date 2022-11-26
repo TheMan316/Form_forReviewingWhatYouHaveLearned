@@ -291,14 +291,15 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 MessageBox.Show("暂无复习内容。");
                 return;
             }
-            this.CurrentMemoryObject.Get_nextMemoryModule().Title = tbx_title.Text;
-            this.CurrentMemoryObject.Get_nextMemoryModule().Content = tbx_content.Text;
+         
+          this.CurrentMemoryObject.Find_theMemoryModule(_currentMemoryModule).Title = tbx_title.Text;
+            this.CurrentMemoryObject.Find_theMemoryModule(_currentMemoryModule).Content = tbx_content.Text;
             Clear_label5();
 
         }
 
         private void button3_Click(object sender, EventArgs e) {
-            this.CurrentMemoryObject.Delete_nextMemoryModule();
+            this.CurrentMemoryObject.Delete_nextMemoryModule(_currentMemoryModule);
             if (Exist_memoryModule_toRemember()) {
                 Update_currentText();
                 this.CurrentMemoryObject.Update();
