@@ -35,8 +35,8 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             TotalRememberTimes++;
             if (isRemember) {
                 MemberLevel++;
-                if (MemberLevel > 8) {
-                    MemberLevel = 8;
+                if (MemberLevel > 9) {
+                    MemberLevel = 9;
                 }
             }
             else {

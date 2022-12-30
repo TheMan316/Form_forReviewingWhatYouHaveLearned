@@ -25,7 +25,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             for (int memberLevel = 0; memberLevel < 9; memberLevel++) {
                 switch (memberLevel) {
                     //单位：分钟
-                    //分别为：5分钟、30分钟、3小时、12小时、1天、2天、4天、7天、15天
+                    //分别为：5分钟、30分钟、3小时、12小时、1天、2天、4天、7天、15天、30天
                     case 0:
                         timeAdded_beBasedOnCurveLevel = 5;
                         break;
@@ -52,6 +52,9 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                         break;
                     case 8:
                         timeAdded_beBasedOnCurveLevel = 21600;
+                        break;
+                    case 9:
+                        timeAdded_beBasedOnCurveLevel = 43200;
                         break;
                     default:
                         break;
