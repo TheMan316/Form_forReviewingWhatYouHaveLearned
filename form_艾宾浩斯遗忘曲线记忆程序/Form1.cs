@@ -47,6 +47,20 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 string[] fileNames = File.ReadAllLines("list.txt");
                 foreach (var fileName in fileNames) {
                     string xmlFile = fileName + ".xml";
+                    string newFile1 = "old" + xmlFile;
+                    string newFile2 = "oldest" + xmlFile;
+                    if (File.Exists(newFile1) == false) {
+                        File.Copy(xmlFile, newFile1);
+                    }
+                    else {
+                        if (File.Exists(newFile2)) {
+                            File.Delete(newFile2);
+                        }
+                        File.Copy(newFile1, newFile2);
+                        File.Delete(newFile1);
+                        File.Copy(xmlFile, newFile1);
+
+                    }
                     if (File.Exists(xmlFile) == false) {
                         continue;
                     }
@@ -134,7 +148,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             _currentMemoryModule = this.CurrentMemoryObject.Get_nextMemoryModule();
             tbx_title.Text = _currentMemoryModule.Title;
         }
-        
+
         private void Update_currentText() {
             Clear_text();
             lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
@@ -185,7 +199,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// 清空文本所有内容
         /// </summary>
         private void Clear_text() {
-            
+
 
             tbx_content.Clear();
             tbx_title.Clear();
@@ -198,7 +212,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             Get_reviewContent();
             Clear_label5();
         }
- 
+
 
         private void btn_yes_Click(object sender, EventArgs e) {
             if (Exist_memoryModule_toRemember()) {
@@ -291,8 +305,8 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 MessageBox.Show("暂无复习内容。");
                 return;
             }
-         
-          this.CurrentMemoryObject.Find_theMemoryModule(_currentMemoryModule).Title = tbx_title.Text;
+
+            this.CurrentMemoryObject.Find_theMemoryModule(_currentMemoryModule).Title = tbx_title.Text;
             this.CurrentMemoryObject.Find_theMemoryModule(_currentMemoryModule).Content = tbx_content.Text;
             Clear_label5();
 
@@ -316,6 +330,18 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
 
         private void tbx_content_TextChanged(object sender, EventArgs e) {
             label5.Text = "内容已经发生变更！";
+        }
+
+        private void button4_Click(object sender, EventArgs e) {
+            float size = tbx_title.Font.Size;
+            size++;
+            tbx_title.Font = new Font(tbx_title.Font.FontFamily, size);
+        }
+
+        private void button5_Click(object sender, EventArgs e) {
+            float size = tbx_title.Font.Size;
+            size--;
+            tbx_title.Font = new Font(tbx_title.Font.FontFamily, size);
         }
     }
 }
