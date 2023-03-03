@@ -65,31 +65,36 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                         continue;
                     }
                     var memoryObject = new MemoryObject(fileName);
-                    if (fileName == "英语阅读") {
-                        int a = 1;
-                    }
+
                     //创建一个xml读取器
                     XmlTextReader reader = new XmlTextReader(xmlFile);
                     //会识别取换行符
                     reader.Normalization = false;
-                    //循环“正在复习的内容”这个名字的所有元素
-                    bool toRemember = true;
+                    bool isRememberModule = true;
+                    int minLevel = 0;
                     while (reader.Read()) {
                         if (reader.NodeType == XmlNodeType.Element) {
-                            if (reader.Name == "无需复习的内容") {
-                                toRemember = false;
+                            if (reader.Name == "root") {
+                                string stringLevel = reader.GetAttribute("默认最小复习等级");
+                                minLevel = Convert.ToInt32(stringLevel);
+                                memoryObject.defaultMinimumLevel = minLevel;
                             }
+                            if (reader.Name == "无需复习的内容") {
+                                isRememberModule = false;
+                            }
+      
                             if (reader.Name == "模块") {
                                 //创建模块
                                 MemoryModule module = new MemoryModule();
+                                
                                 module.Title = reader.GetAttribute("标题");
                                 module.ReviewTime = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
                                 module.TotalRememberTimes = Convert.ToInt32(reader.GetAttribute("共复习次数"));
-                                module.MemberLevel = Convert.ToInt32(reader.GetAttribute("记忆等级"));
+                                module.CurMemberLevel = Convert.ToInt32(reader.GetAttribute("记忆等级"));
                                 //跳到下一个“内容”节点
                                 reader.ReadToDescendant("内容");
                                 module.Content = reader.ReadString();
-                                if (toRemember) {
+                                if (isRememberModule) {
                                     memoryObject.Add_memoryModule_toBeRemenbered(module);
 
                                 }
@@ -110,6 +115,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                     this.CurrentMemoryObject = this.List_MemoryObject[0];
                     Update_currentText();
                     lbl_object.Text = this.CurrentMemoryObject.ObjectName;
+                    label7.Text = this.CurrentMemoryObject.defaultMinimumLevel.ToString();
                 }
                 for (int i = 0; i < this.List_MemoryObject.Count; i++) {
                     int j = i;
@@ -268,8 +274,10 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             for (int i = 0; i < this.List_MemoryObject.Count; i++) {
                 XDocument xml = new XDocument();
                 XElement xRoot = new XElement("root");
-                xml.Add(xRoot);
+                
                 var memoryObject = this.List_MemoryObject[i];
+                xRoot.Add(new XAttribute("默认最小复习等级", memoryObject.defaultMinimumLevel));
+                xml.Add(xRoot);
                 XElement xMemoryObject1 = new XElement("正在复习的内容");
                 xRoot.Add(xMemoryObject1);
                 XElement xMemoryObject2 = new XElement("无需复习的内容");

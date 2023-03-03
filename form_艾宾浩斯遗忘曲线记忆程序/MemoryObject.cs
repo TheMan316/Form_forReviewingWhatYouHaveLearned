@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace form_艾宾浩斯遗忘曲线记忆程序 {
     internal class MemoryObject {
+        public int defaultMinimumLevel = 0;
         /// <summary>
         /// 当前主题需要复习的内容。
         /// </summary>
@@ -13,7 +14,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// <summary>
         /// 当前主题无需复习的内容。
         /// </summary>
-        private BinaryTree _memoryTree_noNeedToBeRemenbered;
+        private BinaryTree _memoryTree_noNeedingToBeRemembered;
         /// <summary>
         /// 当前主题的名字
         /// </summary>
@@ -25,21 +26,21 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         public MemoryObject(string objectName) {
             ObjectName = objectName;
             _memoryTree_toBeRemembered = new BinaryTree();
-            _memoryTree_noNeedToBeRemenbered = new BinaryTree();
+            _memoryTree_noNeedingToBeRemembered = new BinaryTree();
         }
         /// <summary>
         /// 更新数据时，把位于“未复习内容”中已到达复习时间的记忆模块添加到“正在复习内容”列表中。
         /// </summary>
         public void Update() {
-            if (_memoryTree_noNeedToBeRemenbered.Count == 0) {
+            if (_memoryTree_noNeedingToBeRemembered.Count == 0) {
                 return;
             }
             ulong dateNow = Convert.ToUInt64(DateTime.Now.ToString("yyyyMMddHHmmssfff"));
-            var minTreeNode = _memoryTree_noNeedToBeRemenbered.Find_minTreeNode();
-            while (_memoryTree_noNeedToBeRemenbered.Count > 0 && minTreeNode.MemoryModule.ReviewTime < dateNow) {
+            var minTreeNode = _memoryTree_noNeedingToBeRemembered.Find_minTreeNode();
+            while (_memoryTree_noNeedingToBeRemembered.Count > 0 && minTreeNode.MemoryModule.ReviewTime < dateNow) {
                 _memoryTree_toBeRemembered.Add_memoryModule(minTreeNode.MemoryModule);
-                _memoryTree_noNeedToBeRemenbered.Delete_theTreeNode(minTreeNode.MemoryModule);
-                minTreeNode = _memoryTree_noNeedToBeRemenbered.Find_minTreeNode();
+                _memoryTree_noNeedingToBeRemembered.Delete_theTreeNode(minTreeNode.MemoryModule);
+                minTreeNode = _memoryTree_noNeedingToBeRemembered.Find_minTreeNode();
             }
         }
         /// <summary>
@@ -48,8 +49,8 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// <param name="isRemember"></param>
         /// <returns></returns>
         public void Set_reviewTime_ofCurrentMemoryModule(bool isRemember) {
-            var memoryModule_hasBeenDeleted = _memoryTree_toBeRemembered.Get_currentMemoryModule_willBeDeleted(isRemember);
-            _memoryTree_noNeedToBeRemenbered.Add_memoryModule(memoryModule_hasBeenDeleted);
+            var memoryModule_hasBeenDeleted = _memoryTree_toBeRemembered.Get_currentMemoryModule_willBeDeleted(isRemember, defaultMinimumLevel);
+            _memoryTree_noNeedingToBeRemembered.Add_memoryModule(memoryModule_hasBeenDeleted);
         }
         /// <summary>
         ///  Get the memory module that closest to the review time
@@ -81,7 +82,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             _memoryTree_toBeRemembered.Add_memoryModule(memoryModule);
         }
         public void Add_memoryModule_noNeedToBeRemenbered(MemoryModule memoryModule) {
-            _memoryTree_noNeedToBeRemenbered.Add_memoryModule(memoryModule);
+            _memoryTree_noNeedingToBeRemembered.Add_memoryModule(memoryModule);
         }
         public void Add_memoryModule_toBeRemenbered(MemoryModule memoryModule) {
             _memoryTree_toBeRemembered.Add_memoryModule(memoryModule);
@@ -93,7 +94,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             return _memoryTree_toBeRemembered;
         }
         public BinaryTree Get_memoryTree_noNeedToBeRemenbered() {
-            return _memoryTree_noNeedToBeRemenbered;
+            return _memoryTree_noNeedingToBeRemembered;
         }
     }
 }

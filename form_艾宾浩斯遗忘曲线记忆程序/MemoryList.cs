@@ -21,39 +21,42 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
 
         private  void Init_list() {
             int timeAdded_beBasedOnCurveLevel = 0;
-            //共有10个等级（有1级是后加的，没添加在这）
-            for (int memberLevel = 0; memberLevel < 9; memberLevel++) {
+            //共有11个等级
+            for (int memberLevel = 0; memberLevel < 11; memberLevel++) {
                 switch (memberLevel) {
                     //单位：分钟
-                    //分别为：5分钟、30分钟、3小时、12小时、1天、2天、4天、7天、15天、30天
+                    //分别为：30秒，5分钟、30分钟、3小时、12小时、1天、2天、4天、7天、15天、30天
                     case 0:
-                        timeAdded_beBasedOnCurveLevel = 5;
+                        timeAdded_beBasedOnCurveLevel = 0; //三十秒的数据不在这添加。
                         break;
                     case 1:
-                        timeAdded_beBasedOnCurveLevel = 30;
+                        timeAdded_beBasedOnCurveLevel = 5;
                         break;
                     case 2:
-                        timeAdded_beBasedOnCurveLevel = 180;
+                        timeAdded_beBasedOnCurveLevel = 30;
                         break;
                     case 3:
-                        timeAdded_beBasedOnCurveLevel = 720;
+                        timeAdded_beBasedOnCurveLevel = 180;
                         break;
                     case 4:
-                        timeAdded_beBasedOnCurveLevel = 1440;
+                        timeAdded_beBasedOnCurveLevel = 720;
                         break;
                     case 5:
-                        timeAdded_beBasedOnCurveLevel = 2880;
+                        timeAdded_beBasedOnCurveLevel = 1440;
                         break;
                     case 6:
-                        timeAdded_beBasedOnCurveLevel = 5760;
+                        timeAdded_beBasedOnCurveLevel = 2880;
                         break;
                     case 7:
-                        timeAdded_beBasedOnCurveLevel = 10080;
+                        timeAdded_beBasedOnCurveLevel = 5760;
                         break;
                     case 8:
-                        timeAdded_beBasedOnCurveLevel = 21600;
+                        timeAdded_beBasedOnCurveLevel = 10080;
                         break;
                     case 9:
+                        timeAdded_beBasedOnCurveLevel = 21600;
+                        break;
+                    case 10:
                         timeAdded_beBasedOnCurveLevel = 43200;
                         break;
                     default:
@@ -87,10 +90,10 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         /// </summary>
         /// <param name="isRemember"></param>
         /// <returns></returns>
-        public MemoryModule Get_currentMemoryModule_willBeDeleted(bool isRemember) {
+        public MemoryModule Get_currentMemoryModule_willBeDeleted(bool isRemember,int defaultMinimumLevel) {
             MemoryModule memoryModule = Find_minTreeNode().MemoryModule;
             Delete_theTreeNode(memoryModule);
-            memoryModule.Update(isRemember);
+            memoryModule.Update(isRemember, defaultMinimumLevel);
             return memoryModule;
         }
         /// <summary>
@@ -313,7 +316,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                  new XAttribute("标题", $"{node.MemoryModule.Title}"),
                  new XAttribute("下次复习时间", $"{node.MemoryModule.ReviewTime}"),
                  new XAttribute("共复习次数", $"{node.MemoryModule.TotalRememberTimes}"),
-                  new XAttribute("记忆等级", $"{node.MemoryModule.MemberLevel}")));
+                  new XAttribute("记忆等级", $"{node.MemoryModule.CurMemberLevel}")));
 
                 if (node.LeftTreeNode != null) {
                     Loop_chilrendNode(node.LeftTreeNode, xElement1);
@@ -330,7 +333,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                   new XAttribute("标题", $"{_rootNode.MemoryModule.Title}"),
                   new XAttribute("下次复习时间", $"{_rootNode.MemoryModule.ReviewTime}"),
                   new XAttribute("共复习次数", $"{_rootNode.MemoryModule.TotalRememberTimes}"),
-                   new XAttribute("记忆等级", $"{_rootNode.MemoryModule.MemberLevel}")));
+                   new XAttribute("记忆等级", $"{_rootNode.MemoryModule.CurMemberLevel}")));
             if (_rootNode.LeftTreeNode != null) {
                 Loop_chilrendNode(_rootNode.LeftTreeNode, xElement);
             }

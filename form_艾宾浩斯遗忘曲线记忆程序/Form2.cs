@@ -20,6 +20,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                  return;
             }
             MemoryObject memoryObject = new MemoryObject(textBox1.Text);
+            memoryObject.defaultMinimumLevel = comboBox1.SelectedIndex;
             Form1.form.CurrentMemoryObject = memoryObject;
             Form1.form.List_MemoryObject.Add(memoryObject);
             Form1.form.lbl_object.Text = Form1.form.CurrentMemoryObject.ObjectName;
