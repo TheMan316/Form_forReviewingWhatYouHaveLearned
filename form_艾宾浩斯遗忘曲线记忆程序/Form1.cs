@@ -147,6 +147,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             Clear_text();
             this.CurrentMemoryObject.Set_reviewTime_ofCurrentMemoryModule(isRemember);
             lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
+            label7.Text = this.CurrentMemoryObject.defaultMinimumLevel.ToString();
             if (lbl_times_toRemember.Text == "0") {
                 MessageBox.Show("本主题已经复习完毕！");
                 return;
@@ -158,6 +159,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         private void Update_currentText() {
             Clear_text();
             lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
+            label7.Text = this.CurrentMemoryObject.defaultMinimumLevel.ToString();
             if (lbl_times_toRemember.Text == "0") {
                 return;
             }
@@ -191,6 +193,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             Form2 form2 = new Form2();
             Clear_text();
             lbl_times_toRemember.Text = "0";
+            label7.Text = "0";
             form2.Show();
 
         }
@@ -351,6 +354,10 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             float size = tbx_title.Font.Size;
             size--;
             tbx_title.Font = new Font(tbx_title.Font.FontFamily, size);
+        }
+
+        private void 选择复习内容ToolStripMenuItem_Click(object sender, EventArgs e) {
+
         }
     }
 }

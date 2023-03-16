@@ -167,20 +167,21 @@
             // 选择复习内容ToolStripMenuItem
             // 
             this.选择复习内容ToolStripMenuItem.Name = "选择复习内容ToolStripMenuItem";
-            this.选择复习内容ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.选择复习内容ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.选择复习内容ToolStripMenuItem.Text = "选择复习内容";
+            this.选择复习内容ToolStripMenuItem.Click += new System.EventHandler(this.选择复习内容ToolStripMenuItem_Click);
             // 
             // 创建复习内容ToolStripMenuItem
             // 
             this.创建复习内容ToolStripMenuItem.Name = "创建复习内容ToolStripMenuItem";
-            this.创建复习内容ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.创建复习内容ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.创建复习内容ToolStripMenuItem.Text = "创建复习主题";
             this.创建复习内容ToolStripMenuItem.Click += new System.EventHandler(this.创建复习内容ToolStripMenuItem_Click);
             // 
             // 说明ToolStripMenuItem
             // 
             this.说明ToolStripMenuItem.Name = "说明ToolStripMenuItem";
-            this.说明ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
+            this.说明ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.说明ToolStripMenuItem.Text = "说明";
             this.说明ToolStripMenuItem.Click += new System.EventHandler(this.说明ToolStripMenuItem_Click);
             // 
