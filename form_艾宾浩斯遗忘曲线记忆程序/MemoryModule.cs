@@ -45,7 +45,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                     CurMemberLevel = minLevel;
                 }
             }
-            if (CurMemberLevel == 0) {
+            if (CurMemberLevel <= 0) {
                 //加30秒
                 date_toRemember = date_toRemember.AddSeconds(30);
             }
@@ -53,6 +53,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                uint m = 艾宾浩斯遗忘曲线类.艾宾浩斯遗忘曲线.Get_timesAdded(CurMemberLevel);
                 date_toRemember = date_toRemember.AddMinutes(m);
             }
+
             ReviewTime = Convert.ToUInt64(date_toRemember.ToString("yyyyMMddHHmmssfff"));
         }
 

@@ -68,17 +68,18 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
     }
 
     internal class TreeNode {
-        public MemoryModule MemoryModule { get; set; }
-        public TreeNode LeftTreeNode { get; set; }
-        public TreeNode RightTreeNode { get; set; }
+        public MemoryModule MemoryModule { get; set; } 
+        public TreeNode LeftTreeNode { get; set; } 
+        public TreeNode RightTreeNode { get; set; } 
         public TreeNode(MemoryModule memoryModule) {
             this.MemoryModule = memoryModule;
         }
+
     }
     //当前时间内需要复习的内容。
     internal class BinaryTree {
 
-        private TreeNode _rootNode;
+        private TreeNode _rootNode = null;
 
 
 
@@ -283,6 +284,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             TreeNode currentTreeNode = _rootNode;
             Count++;
             if (currentTreeNode == null) {
+                
                 _rootNode = new TreeNode(memoryModule_willBeAdded);
                 return;
             }
