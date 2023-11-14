@@ -44,6 +44,13 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             }
         }
         /// <summary>
+        /// 获取所有的复习内容数
+        /// </summary>
+        /// <returns></returns>
+        public int Get_count_toRemember() {
+            return _memoryTree_noNeedingToBeRemembered.Count + _memoryTree_toBeRemembered.Count;
+        }
+        /// <summary>
         /// 根据是否记住的状态更新当前记忆模块的“下一个复习时间”，然后把它从“正在复习内容”中删除。
         /// </summary>
         /// <param name="isRemember"></param>

@@ -38,12 +38,13 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 if (CurMemberLevel > 10) {
                     CurMemberLevel = 10;
                 }
+  
             }
             else {
                 CurMemberLevel -= 2;
-                if (CurMemberLevel < minLevel) {
-                    CurMemberLevel = minLevel;
-                }
+            }
+            if (CurMemberLevel < minLevel) {
+                CurMemberLevel = minLevel;
             }
             if (CurMemberLevel <= 0) {
                 //加30秒

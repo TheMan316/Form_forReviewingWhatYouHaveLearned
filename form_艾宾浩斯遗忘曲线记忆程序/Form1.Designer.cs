@@ -49,6 +49,8 @@
             this.button5 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lbl_totalTimes_toRemember = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,18 +58,18 @@
             // 
             this.tbx_title.BackColor = System.Drawing.SystemColors.Menu;
             this.tbx_title.Font = new System.Drawing.Font("微软雅黑", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbx_title.Location = new System.Drawing.Point(175, 139);
+            this.tbx_title.Location = new System.Drawing.Point(173, 195);
             this.tbx_title.Multiline = true;
             this.tbx_title.Name = "tbx_title";
             this.tbx_title.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbx_title.Size = new System.Drawing.Size(784, 135);
+            this.tbx_title.Size = new System.Drawing.Size(835, 180);
             this.tbx_title.TabIndex = 0;
             this.tbx_title.TextChanged += new System.EventHandler(this.tbx_title_TextChanged);
             // 
             // btn_showAnswer
             // 
             this.btn_showAnswer.BackColor = System.Drawing.SystemColors.Info;
-            this.btn_showAnswer.Location = new System.Drawing.Point(549, 285);
+            this.btn_showAnswer.Location = new System.Drawing.Point(576, 391);
             this.btn_showAnswer.Name = "btn_showAnswer";
             this.btn_showAnswer.Size = new System.Drawing.Size(75, 23);
             this.btn_showAnswer.TabIndex = 2;
@@ -78,7 +80,7 @@
             // btn_addNewMemoryModule
             // 
             this.btn_addNewMemoryModule.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.btn_addNewMemoryModule.Location = new System.Drawing.Point(498, 103);
+            this.btn_addNewMemoryModule.Location = new System.Drawing.Point(542, 158);
             this.btn_addNewMemoryModule.Name = "btn_addNewMemoryModule";
             this.btn_addNewMemoryModule.Size = new System.Drawing.Size(155, 28);
             this.btn_addNewMemoryModule.TabIndex = 3;
@@ -90,11 +92,11 @@
             // 
             this.tbx_content.BackColor = System.Drawing.SystemColors.Menu;
             this.tbx_content.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbx_content.Location = new System.Drawing.Point(15, 360);
+            this.tbx_content.Location = new System.Drawing.Point(12, 468);
             this.tbx_content.Multiline = true;
             this.tbx_content.Name = "tbx_content";
             this.tbx_content.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbx_content.Size = new System.Drawing.Size(1070, 481);
+            this.tbx_content.Size = new System.Drawing.Size(1070, 431);
             this.tbx_content.TabIndex = 4;
             this.tbx_content.TextChanged += new System.EventHandler(this.tbx_content_TextChanged);
             // 
@@ -102,7 +104,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(170, 104);
+            this.label1.Location = new System.Drawing.Point(168, 160);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 27);
             this.label1.TabIndex = 5;
@@ -112,7 +114,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(12, 323);
+            this.label2.Location = new System.Drawing.Point(12, 431);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 27);
             this.label2.TabIndex = 6;
@@ -122,7 +124,7 @@
             // 
             this.btn_yes.BackColor = System.Drawing.Color.LightGreen;
             this.btn_yes.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_yes.Location = new System.Drawing.Point(429, 330);
+            this.btn_yes.Location = new System.Drawing.Point(450, 434);
             this.btn_yes.Name = "btn_yes";
             this.btn_yes.Size = new System.Drawing.Size(76, 28);
             this.btn_yes.TabIndex = 7;
@@ -134,7 +136,7 @@
             // 
             this.btn_no.BackColor = System.Drawing.Color.Pink;
             this.btn_no.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_no.Location = new System.Drawing.Point(658, 330);
+            this.btn_no.Location = new System.Drawing.Point(685, 434);
             this.btn_no.Name = "btn_no";
             this.btn_no.Size = new System.Drawing.Size(76, 28);
             this.btn_no.TabIndex = 8;
@@ -167,21 +169,21 @@
             // 选择复习内容ToolStripMenuItem
             // 
             this.选择复习内容ToolStripMenuItem.Name = "选择复习内容ToolStripMenuItem";
-            this.选择复习内容ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.选择复习内容ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.选择复习内容ToolStripMenuItem.Text = "选择复习内容";
             this.选择复习内容ToolStripMenuItem.Click += new System.EventHandler(this.选择复习内容ToolStripMenuItem_Click);
             // 
             // 创建复习内容ToolStripMenuItem
             // 
             this.创建复习内容ToolStripMenuItem.Name = "创建复习内容ToolStripMenuItem";
-            this.创建复习内容ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.创建复习内容ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.创建复习内容ToolStripMenuItem.Text = "创建复习主题";
             this.创建复习内容ToolStripMenuItem.Click += new System.EventHandler(this.创建复习内容ToolStripMenuItem_Click);
             // 
             // 说明ToolStripMenuItem
             // 
             this.说明ToolStripMenuItem.Name = "说明ToolStripMenuItem";
-            this.说明ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.说明ToolStripMenuItem.Size = new System.Drawing.Size(182, 26);
             this.说明ToolStripMenuItem.Text = "说明";
             this.说明ToolStripMenuItem.Click += new System.EventHandler(this.说明ToolStripMenuItem_Click);
             // 
@@ -197,7 +199,7 @@
             // lbl_object
             // 
             this.lbl_object.AutoSize = true;
-            this.lbl_object.Location = new System.Drawing.Point(130, 42);
+            this.lbl_object.Location = new System.Drawing.Point(141, 42);
             this.lbl_object.Name = "lbl_object";
             this.lbl_object.Size = new System.Drawing.Size(22, 15);
             this.lbl_object.TabIndex = 11;
@@ -206,17 +208,17 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 67);
+            this.label4.Location = new System.Drawing.Point(8, 94);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(112, 15);
+            this.label4.Size = new System.Drawing.Size(142, 15);
             this.label4.TabIndex = 12;
-            this.label4.Text = "剩余复习数量：";
+            this.label4.Text = "该模块剩余复习数：";
             // 
             // lbl_times_toRemember
             // 
             this.lbl_times_toRemember.AutoSize = true;
             this.lbl_times_toRemember.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbl_times_toRemember.Location = new System.Drawing.Point(134, 67);
+            this.lbl_times_toRemember.Location = new System.Drawing.Point(146, 92);
             this.lbl_times_toRemember.Name = "lbl_times_toRemember";
             this.lbl_times_toRemember.Size = new System.Drawing.Size(18, 18);
             this.lbl_times_toRemember.TabIndex = 13;
@@ -235,7 +237,7 @@
             // 
             // btn_refreshText
             // 
-            this.btn_refreshText.Location = new System.Drawing.Point(175, 279);
+            this.btn_refreshText.Location = new System.Drawing.Point(181, 385);
             this.btn_refreshText.Name = "btn_refreshText";
             this.btn_refreshText.Size = new System.Drawing.Size(93, 29);
             this.btn_refreshText.TabIndex = 15;
@@ -245,7 +247,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(874, 279);
+            this.button2.Location = new System.Drawing.Point(923, 385);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(85, 28);
             this.button2.TabIndex = 16;
@@ -258,7 +260,7 @@
             this.button3.BackColor = System.Drawing.Color.RosyBrown;
             this.button3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button3.ForeColor = System.Drawing.Color.Cornsilk;
-            this.button3.Location = new System.Drawing.Point(862, 104);
+            this.button3.Location = new System.Drawing.Point(911, 158);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(97, 29);
             this.button3.TabIndex = 17;
@@ -279,7 +281,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(121, 139);
+            this.button4.Location = new System.Drawing.Point(119, 195);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(31, 26);
             this.button4.TabIndex = 19;
@@ -289,7 +291,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(121, 171);
+            this.button5.Location = new System.Drawing.Point(119, 227);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(31, 26);
             this.button5.TabIndex = 20;
@@ -300,7 +302,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 93);
+            this.label6.Location = new System.Drawing.Point(9, 120);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(142, 15);
             this.label6.TabIndex = 21;
@@ -310,18 +312,39 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(146, 92);
+            this.label7.Location = new System.Drawing.Point(146, 119);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(17, 18);
             this.label7.TabIndex = 18;
             this.label7.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(8, 68);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(127, 15);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "该模块总复习数：";
+            // 
+            // lbl_totalTimes_toRemember
+            // 
+            this.lbl_totalTimes_toRemember.AutoSize = true;
+            this.lbl_totalTimes_toRemember.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl_totalTimes_toRemember.Location = new System.Drawing.Point(146, 65);
+            this.lbl_totalTimes_toRemember.Name = "lbl_totalTimes_toRemember";
+            this.lbl_totalTimes_toRemember.Size = new System.Drawing.Size(17, 18);
+            this.lbl_totalTimes_toRemember.TabIndex = 23;
+            this.lbl_totalTimes_toRemember.Text = "0";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(1104, 853);
+            this.ClientSize = new System.Drawing.Size(1104, 911);
+            this.Controls.Add(this.lbl_totalTimes_toRemember);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button5);
@@ -344,10 +367,10 @@
             this.Controls.Add(this.btn_showAnswer);
             this.Controls.Add(this.tbx_title);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximumSize = new System.Drawing.Size(1122, 900);
-            this.MinimumSize = new System.Drawing.Size(1122, 900);
+            this.MaximumSize = new System.Drawing.Size(1122, 958);
+            this.MinimumSize = new System.Drawing.Size(1122, 958);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "艾宾浩斯记忆程序";
@@ -388,6 +411,8 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label6;
         public System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lbl_totalTimes_toRemember;
     }
 }
 

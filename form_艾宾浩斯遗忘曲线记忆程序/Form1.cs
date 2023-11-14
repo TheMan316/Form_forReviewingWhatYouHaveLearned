@@ -35,7 +35,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                 string content = "当前所需复习的主题有：";
                 for (int i = 0; i < List_MemoryObject.Count; i++) {
                     if (List_MemoryObject[i].Get_times_toRemember() > 0) {
-                        content += $"\n{List_MemoryObject[i].ObjectName}，复习的知识数量为：" +
+                        content += $"\n{List_MemoryObject[i].ObjectName}，待复习的知识数量为：" +
                             $"{List_MemoryObject[i].Get_times_toRemember()}";
                     }
                 }
@@ -82,7 +82,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                             if (reader.Name == "无需复习的内容") {
                                 isRememberModule = false;
                             }
-      
+                            
                             if (reader.Name == "模块") {
                                 //创建模块
                                 MemoryModule module = new MemoryModule();
@@ -90,7 +90,11 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
                                 module.Title = reader.GetAttribute("标题");
                                 module.ReviewTime = Convert.ToUInt64(reader.GetAttribute("下次复习时间"));
                                 module.TotalRememberTimes = Convert.ToInt32(reader.GetAttribute("共复习次数"));
-                                module.CurMemberLevel = Convert.ToInt32(reader.GetAttribute("记忆等级"));
+                                module.CurMemberLevel = Convert.ToInt32(reader.GetAttribute("记忆等级"))-1;
+                                if (module.CurMemberLevel < 0) {
+                                    module.CurMemberLevel = Math.Abs(module.CurMemberLevel);
+                                }
+
                                 //跳到下一个“内容”节点
                                 reader.ReadToDescendant("内容");
                                 module.Content = reader.ReadString();
@@ -147,6 +151,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             Clear_text();
             this.CurrentMemoryObject.Set_reviewTime_ofCurrentMemoryModule(isRemember);
             lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
+            lbl_totalTimes_toRemember.Text = this.CurrentMemoryObject.Get_count_toRemember().ToString();
             label7.Text = this.CurrentMemoryObject.defaultMinimumLevel.ToString();
             if (lbl_times_toRemember.Text == "0") {
                 MessageBox.Show("本主题已经复习完毕！");
@@ -159,6 +164,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         private void Update_currentText() {
             Clear_text();
             lbl_times_toRemember.Text = this.CurrentMemoryObject.Get_times_toRemember().ToString();
+            lbl_totalTimes_toRemember.Text = this.CurrentMemoryObject.Get_count_toRemember().ToString();
             label7.Text = this.CurrentMemoryObject.defaultMinimumLevel.ToString();
             if (lbl_times_toRemember.Text == "0") {
                 return;
@@ -193,6 +199,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
             Form2 form2 = new Form2();
             Clear_text();
             lbl_times_toRemember.Text = "0";
+            lbl_totalTimes_toRemember.Text = "0";
             label7.Text = "0";
             form2.Show();
 
@@ -297,7 +304,7 @@ namespace form_艾宾浩斯遗忘曲线记忆程序 {
         }
 
         private void 说明ToolStripMenuItem_Click(object sender, EventArgs e) {
-            MessageBox.Show("版权归属：lingnan_man@qq.com\n初版完成时间：2022年11月4日1:26\n记忆等级分为10个等级：\n" +
+            MessageBox.Show("版权归属：lingnan_man@qq.com\n初版完成时间：2022年11月4日1:26\n记忆等级分为11个等级：\n" +
                 "第一级：30秒后进入复习时间。" +
                 "\n第二级：5分钟后进入复习时间。" +
                 "\n第三极：30分钟后进入复习时间。" +
